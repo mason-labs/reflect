@@ -3,6 +3,7 @@
   "account_id": "ea76e5b24c115e61c4ca83acb28b7e4d",
   "compatibility_date": "2025-01-01",
   "main": "./worker/index.ts",
+  "workers_dev": true,
   "routes": [
     { "pattern": "madewithmason.com/mason-os/reflect*", "zone_name": "madewithmason.com" },
     { "pattern": "cdd.dev/reflect*", "zone_name": "cdd.dev" }
