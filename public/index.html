@@ -68,7 +68,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo+Narrow:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./styles.css?v=12">
+<link rel="stylesheet" href="./styles.css?v=13">
 </head>
 <body>
 
@@ -342,10 +342,23 @@
     Covers painted by gpt&#8209;image&#8209;1.5. No robots were harmed; several were improved.</p>
 </footer>
 
-<button id="mute" class="mute-btn" aria-pressed="false" aria-label="Mute sound effects" title="Sound effects">
-  <svg class="ic-on" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
-  <svg class="ic-off" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><line x1="15" y1="9" x2="21" y2="15"/><line x1="21" y1="9" x2="15" y2="15"/></svg>
-</button>
-<script src="./app.js?v=3" defer></script>
+<div class="sound-cluster">
+  <div id="sound-panel" class="sound-panel" role="group" aria-label="Sound settings">
+    <p class="sp-title">TRANSMISSION</p>
+    <div class="sp-row">
+      <span class="sp-label">Music</span>
+      <button id="sw-music" class="sp-switch" role="switch" aria-checked="false" aria-label="Toggle ambient music"><span class="sp-knob"></span></button>
+    </div>
+    <div class="sp-row">
+      <span class="sp-label">Sound FX</span>
+      <button id="sw-sfx" class="sp-switch" role="switch" aria-checked="true" aria-label="Toggle interface sound effects"><span class="sp-knob"></span></button>
+    </div>
+  </div>
+  <button id="sound-btn" class="mute-btn" aria-expanded="false" aria-haspopup="true" aria-label="Sound settings">
+    <svg class="ic-on" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+    <svg class="ic-off" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><line x1="15" y1="9" x2="21" y2="15"/><line x1="21" y1="9" x2="15" y2="15"/></svg>
+  </button>
+</div>
+<script src="./app.js?v=4" defer></script>
 </body>
 </html>
