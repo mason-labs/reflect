@@ -63,7 +63,7 @@ function cueTick() {
   o.type = "square";
   o.frequency.setValueAtTime(1900, t);
   o.frequency.exponentialRampToValueAtTime(700, t + 0.045);
-  o.connect(envGain(ac, ac.destination, t, 0.045, 0.004, 0.06));
+  o.connect(envGain(ac, ac.destination, t, 0.1, 0.004, 0.06));
   o.start(t); o.stop(t + 0.08);
 }
 
@@ -74,7 +74,7 @@ function cueChime() {
     var o = ac.createOscillator();
     o.type = "triangle";
     o.frequency.value = f;
-    o.connect(envGain(ac, ac.destination, t + i * 0.09, 0.055, 0.012, 0.35));
+    o.connect(envGain(ac, ac.destination, t + i * 0.09, 0.12, 0.012, 0.35));
     o.start(t + i * 0.09); o.stop(t + i * 0.09 + 0.4);
   });
 }
@@ -90,7 +90,7 @@ function cueBloom() {
   v.frequency.value = 5.5;
   var vg = ac.createGain(); vg.gain.value = 6;
   v.connect(vg); vg.connect(o.frequency);
-  o.connect(envGain(ac, ac.destination, t, 0.05, 0.25, 0.9));
+  o.connect(envGain(ac, ac.destination, t, 0.09, 0.25, 0.9));
   o.start(t); v.start(t);
   o.stop(t + 1.3); v.stop(t + 1.3);
 }
@@ -109,7 +109,7 @@ function cueWhoosh() {
   f.frequency.setValueAtTime(220, t);
   f.frequency.exponentialRampToValueAtTime(1600, t + 0.7);
   src.connect(f);
-  f.connect(envGain(ac, ac.destination, t, 0.05, 0.15, 0.7));
+  f.connect(envGain(ac, ac.destination, t, 0.09, 0.15, 0.7));
   src.start(t);
 }
 
@@ -123,15 +123,15 @@ function startMusic() {
   var ac = audio(), t = ac.currentTime;
   var master = ac.createGain();
   master.gain.setValueAtTime(0.0001, t);
-  master.gain.exponentialRampToValueAtTime(0.16, t + 2.5);
+  master.gain.exponentialRampToValueAtTime(0.34, t + 1.2);
   master.connect(ac.destination);
 
   var lp = ac.createBiquadFilter();
-  lp.type = "lowpass"; lp.frequency.value = 820; lp.Q.value = 0.4;
-  var padGain = ac.createGain(); padGain.gain.value = 0.22;
+  lp.type = "lowpass"; lp.frequency.value = 1250; lp.Q.value = 0.4;
+  var padGain = ac.createGain(); padGain.gain.value = 0.3;
   lp.connect(padGain); padGain.connect(master);
 
-  var oscs = [110, 110.6, 165.1, 220.4].map(function (f) {
+  var oscs = [110, 220.6, 330.2, 441].map(function (f) {
     var o = ac.createOscillator();
     o.type = "sine"; o.frequency.value = f;
     o.connect(lp); o.start(t);
@@ -141,7 +141,7 @@ function startMusic() {
   // slow breathing on the pad
   var lfo = ac.createOscillator();
   lfo.frequency.value = 0.07;
-  var lfoGain = ac.createGain(); lfoGain.gain.value = 0.08;
+  var lfoGain = ac.createGain(); lfoGain.gain.value = 0.09;
   lfo.connect(lfoGain); lfoGain.connect(padGain.gain);
   lfo.start(t);
 
@@ -154,17 +154,23 @@ function startMusic() {
   delay.connect(wet); wet.connect(master);
 
   var SCALE = [440, 523.25, 587.33, 659.25, 783.99, 880, 1046.5];
-  var timer = setInterval(function () {
-    if (!bed) return;
-    if (Math.random() < 0.35) return; // rests keep it sparse
-    var t2 = ac.currentTime;
-    var f = SCALE[Math.floor(Math.random() * SCALE.length)];
+  function twinkle(f, at, peak) {
     var o = ac.createOscillator();
     o.type = "sine"; o.frequency.value = f;
-    var g = envGain(ac, master, t2, 0.11, 0.02, 1.4);
+    var g = envGain(ac, master, at, peak, 0.02, 1.4);
     o.connect(g); g.connect(delay);
-    o.start(t2); o.stop(t2 + 1.5);
-  }, 2600);
+    o.start(at); o.stop(at + 1.5);
+  }
+  // instant confirmation: a small rising arpeggio the moment music starts
+  [523.25, 659.25, 880].forEach(function (f, i) {
+    twinkle(f, t + 0.05 + i * 0.16, 0.22);
+  });
+  var timer = setInterval(function () {
+    if (!bed) return;
+    if (Math.random() < 0.25) return; // rests keep it sparse
+    twinkle(SCALE[Math.floor(Math.random() * SCALE.length)],
+            ac.currentTime, 0.2);
+  }, 2000);
 
   bed = { master: master, oscs: oscs, lfo: lfo, timer: timer };
 }
@@ -212,9 +218,11 @@ if (soundBtn && soundPanel) {
       if (musicOn) startMusic();
       window.removeEventListener("pointerdown", arm);
       window.removeEventListener("keydown", arm);
+      window.removeEventListener("click", arm);
     };
     window.addEventListener("pointerdown", arm);
     window.addEventListener("keydown", arm);
+    window.addEventListener("click", arm);
   }
 
   soundBtn.addEventListener("click", function () {
