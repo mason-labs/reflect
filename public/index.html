@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>reflect — Astounding Tales of Self-Improving Machines</title>
+<meta name="description" content="A family of agent skills that turns one session's friction into every future session's head start. Install with npx skills add ckorhonen/reflect.">
+<meta property="og:title" content="reflect — skills that make your agent better at being your agent">
+<meta property="og:description" content="Session friction in. Rules, skills, commands, scripts out. Improvements that compound.">
+<meta property="og:image" content="https://cdd.dev/reflect/img/cover-hero.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128257;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo+Narrow:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<header class="masthead-bar reveal-now">
+  <span class="mb-item">Vol. 1 · No. 1</span>
+  <span class="mb-item mb-title">A CDD.DEV PRODUCTION</span>
+  <span class="mb-item">10&cent; · still cheaper than re-deriving it</span>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-copy">
+    <p class="kicker reveal-now d1">Astounding tales of</p>
+    <h1 class="masthead reveal-now d2">SELF&#8209;IMPROVING<br>MACHINES</h1>
+    <p class="hero-sub reveal-now d3">Starring <strong>reflect</strong> — a family of agent skills
+      that turns one session's friction into every future session's head&nbsp;start.</p>
+    <p class="hero-body reveal-now d4">Every session with a coding agent produces two things:
+      the work, and a trail of friction — corrections you repeated, facts the agent
+      rediscovered the hard way, tokens burned on output nobody read. The work ships.
+      The friction evaporates, and you pay for it again tomorrow.
+      <em>reflect</em> captures it instead, and compounds it.</p>
+    <div class="install reveal-now d5">
+      <code id="install-cmd">npx skills add ckorhonen/reflect</code>
+      <button class="copy-btn" data-copy="npx skills add ckorhonen/reflect" aria-label="Copy install command">COPY</button>
+    </div>
+    <p class="hero-links reveal-now d6">
+      <a href="https://github.com/ckorhonen/reflect">Read the source at GitHub&nbsp;&rarr;</a>
+    </p>
+  </div>
+  <figure class="hero-cover reveal-now d3">
+    <img src="./img/cover-hero.png" width="1024" height="1536"
+         alt="Pulp sci-fi painting: a brass robot kneels at a lunar pool, seeing an upgraded chrome version of itself in the reflection, beneath a glowing ring of stars.">
+    <figcaption>&ldquo;It looked into the pool&hellip; and saw what it could become.&rdquo;</figcaption>
+  </figure>
+</section>
+
+<!-- ============ THE LOOP ============ -->
+<section class="section loop-section" id="loop">
+  <p class="kicker reveal">This issue's feature</p>
+  <h2 class="section-title reveal">THE LOOP</h2>
+  <p class="section-lede reveal">Five panels. Runs at the end of a session, or on a schedule.
+    Entirely hands&#8209;off: safe improvements apply themselves, risky ones queue for your approval.</p>
+
+  <ol class="strip">
+    <li class="panel reveal">
+      <span class="panel-no">1</span>
+      <h3>The session ends</h3>
+      <p>A transcript full of evidence: what you corrected, what stalled,
+         what the agent figured out the hard way.</p>
+    </li>
+    <li class="panel reveal">
+      <span class="panel-no">2</span>
+      <h3>Signals surface</h3>
+      <p>Repeated corrections. Wrong first guesses. The same three commands
+         reconstructed from scratch. One tool call hogging half the context.</p>
+    </li>
+    <li class="panel reveal">
+      <span class="panel-no">3</span>
+      <h3>Each signal gets a lane</h3>
+      <p>A rule, a skill, a slash command, a script, a delegation,
+         a context diet — one signal, one lane, one smallest-possible change.</p>
+    </li>
+    <li class="panel reveal">
+      <span class="panel-no">4</span>
+      <h3>The gate</h3>
+      <p>Evidence-backed? Durable? Not already written down? Testable?
+         Anything that can't answer yes four times gets logged as a hunch — or dropped.</p>
+    </li>
+    <li class="panel reveal">
+      <span class="panel-no">5</span>
+      <h3>Apply &amp; ledger</h3>
+      <p>Changes land in your repo; every one gets a ledger row.
+         The next session starts already knowing what this one learned.</p>
+    </li>
+  </ol>
+  <p class="loop-return reveal">&#8635; and the machine wakes up a little sharper tomorrow.</p>
+</section>
+
+<!-- ============ EIGHT LANES ============ -->
+<section class="section lanes-section" id="lanes">
+  <p class="kicker reveal">Field manual, plate II</p>
+  <h2 class="section-title reveal">THE EIGHT LANES</h2>
+  <div class="lanes">
+    <div class="lane reveal"><span class="lane-no">01</span><div><h3>Agent rules</h3><p>One-line additions to <span class="file">AGENTS.md</span> / <span class="file">CLAUDE.md</span> the agent should never rediscover.</p></div></div>
+    <div class="lane reveal"><span class="lane-no">02</span><div><h3>Skills</h3><p>Workflows with enough judgment to deserve their own trigger — authored, or installed from the ecosystem.</p></div></div>
+    <div class="lane reveal"><span class="lane-no">03</span><div><h3>Slash commands</h3><p>The request you keep typing, reduced to one keystroke of intent.</p></div></div>
+    <div class="lane reveal"><span class="lane-no">04</span><div><h3>Deterministic scripts</h3><p>Fragile hand-repeated parsing and checking, encoded as code. If an LLM isn't needed to verify it, an LLM shouldn't do it twice.</p></div></div>
+    <div class="lane reveal"><span class="lane-no">05</span><div><h3>Delegation</h3><p>Bounded, checkable work routed to smaller, cheaper models. The main thread graduates to orchestrator.</p></div></div>
+    <div class="lane reveal"><span class="lane-no">06</span><div><h3>Context diet</h3><p>Verbose tool output wrapped, filtered, or capped — measured in tokens, not vibes.</p></div></div>
+    <div class="lane reveal"><span class="lane-no">07</span><div><h3>Observations</h3><p>Maybe-patterns logged with a sighting count until they earn promotion.</p></div></div>
+    <div class="lane reveal"><span class="lane-no">08</span><div><h3>No action</h3><p>A confident, recorded &ldquo;not worth it.&rdquo; The lane that keeps the other seven honest.</p></div></div>
+  </div>
+</section>
+
+<!-- ============ BACK ISSUES / THE SKILLS ============ -->
+<section class="section issues-section" id="skills">
+  <p class="kicker reveal">Collect all four</p>
+  <h2 class="section-title reveal">THE BACK ISSUES</h2>
+  <p class="section-lede reveal">One package, four skills. Install the set, or pick your issues.</p>
+
+  <div class="rack">
+    <article class="issue reveal">
+      <div class="issue-art"><img src="./img/issue-reflect.png" alt="A brass robot studies a ticker tape of its own actions through a magnifying glass." loading="lazy" width="512" height="512"></div>
+      <div class="issue-head"><span class="issue-no">No.&nbsp;1</span><h3>reflect</h3></div>
+      <p class="issue-tag">&ldquo;The Machine That Read Its Own Mind&rdquo;</p>
+      <p>The core loop. Reviews the session, routes findings into the eight lanes,
+         applies what clears the gate, ledgers everything. Ships a transcript
+         analyzer so it reads evidence, not the whole log.</p>
+      <code class="issue-install">npx skills add ckorhonen/reflect@reflect</code>
+    </article>
+
+    <article class="issue reveal">
+      <div class="issue-art"><img src="./img/issue-feedback.png" alt="A chrome robot checks a wall of analog gauges, clipboard in hand." loading="lazy" width="512" height="512"></div>
+      <div class="issue-head"><span class="issue-no">No.&nbsp;2</span><h3>reflect&#8209;feedback</h3></div>
+      <p class="issue-tag">&ldquo;The Gauges Never Lie&rdquo;</p>
+      <p>Reflection without feedback just accumulates. Audits the ledger:
+         verifies improvements that demonstrably fire, watches the young ones,
+         prunes dead weight. Never invents usage.</p>
+      <code class="issue-install">npx skills add ckorhonen/reflect@reflect-feedback</code>
+    </article>
+
+    <article class="issue reveal">
+      <div class="issue-art"><img src="./img/issue-memory.png" alt="A robot librarian on a ladder prunes an endless card-catalog archive; discarded cards dissolve into light." loading="lazy" width="512" height="512"></div>
+      <div class="issue-head"><span class="issue-no">No.&nbsp;3</span><h3>reflect&#8209;memory</h3></div>
+      <p class="issue-tag">&ldquo;The Archive That Ate Itself&rdquo;</p>
+      <p>Compounding's failure mode is unbounded growth. Dedupes, merges,
+         expires, and de-contradicts accumulated rules — and reports the
+         context-token load before and after.</p>
+      <code class="issue-install">npx skills add ckorhonen/reflect@reflect-memory</code>
+    </article>
+
+    <article class="issue reveal">
+      <div class="issue-art"><img src="./img/issue-skills.png" alt="A robot mechanic swaps interchangeable rocket tools from a hangar rack." loading="lazy" width="512" height="512"></div>
+      <div class="issue-head"><span class="issue-no">No.&nbsp;4</span><h3>reflect&#8209;skills</h3></div>
+      <p class="issue-tag">&ldquo;The Hangar of a Thousand Tools&rdquo;</p>
+      <p>Scans weeks of local session logs, clusters the recurring failures,
+         and treats your skill collection as the fix surface: sharpen a
+         trigger, install from the ecosystem, author new, or retire a misfirer.</p>
+      <code class="issue-install">npx skills add ckorhonen/reflect@reflect-skills</code>
+    </article>
+  </div>
+</section>
+
+<!-- ============ THE LEDGER ============ -->
+<section class="section ledger-section" id="ledger">
+  <div class="ledger-inner">
+    <p class="kicker reveal">Exhibit A</p>
+    <h2 class="section-title reveal">THE LEDGER</h2>
+    <p class="section-lede reveal">Cross-session memory is a <span class="file">.reflect/</span> folder of
+      plain markdown — readable, reviewable, committable. Team memory, not a black box.
+      Every improvement carries its evidence and earns its status.</p>
+
+    <div class="ledger-doc reveal" role="img" aria-label="Example applied.md ledger: two improvement rows with lane, target, status and evidence">
+      <div class="ledger-doc-head">.reflect/applied.md</div>
+      <table>
+        <thead><tr><th>Date</th><th>Lane</th><th>Change</th><th>Status</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td>07&#8209;19</td><td>script</td><td>Strip ANSI codes in error signatures</td><td><span class="st st-applied">applied</span></td><td>scan of 15 sessions showed garbled rows; clean after fix</td></tr>
+          <tr><td>07&#8209;19</td><td>rule</td><td>Test-timeout rule &rarr; AGENTS.md</td><td><span class="st st-verified">verified</span></td><td>3 hung runs before; zero since</td></tr>
+          <tr><td>07&#8209;12</td><td>command</td><td>/release-notes house-style command</td><td><span class="st st-proposed">proposed</span></td><td>same request typed 4 ways in 3 sessions</td></tr>
+          <tr><td>06&#8209;28</td><td>skill</td><td>pdf-extraction skill</td><td><span class="st st-pruned">pruned</span></td><td>never fired in 30 days; superseded upstream</td></tr>
+        </tbody>
+      </table>
+      <p class="ledger-note">Real rows from dogfooding this very package — the ANSI fix was
+        found by running reflect's scanner on the sessions that built reflect.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <p class="footer-cta-kicker">Don't miss the next issue</p>
+  <div class="install install-footer">
+    <code>npx skills add ckorhonen/reflect</code>
+    <button class="copy-btn" data-copy="npx skills add ckorhonen/reflect" aria-label="Copy install command">COPY</button>
+  </div>
+  <p class="footer-meta">
+    <a href="https://github.com/ckorhonen/reflect">github.com/ckorhonen/reflect</a>
+    &nbsp;&middot;&nbsp; MIT licensed &nbsp;&middot;&nbsp; works with any harness that reads
+    the open <a href="https://skills.sh">SKILL.md format</a>
+  </p>
+  <p class="footer-colophon">A <a href="https://cdd.dev">cdd.dev</a> production.
+    Covers painted by gpt&#8209;image&#8209;1.5. No robots were harmed; several were improved.</p>
+</footer>
+
+<script src="./app.js" defer></script>
+</body>
+</html>
