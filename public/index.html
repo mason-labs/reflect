@@ -68,14 +68,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo+Narrow:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./styles.css?v=11">
+<link rel="stylesheet" href="./styles.css?v=12">
 </head>
 <body>
 
 <header class="masthead-bar">
   <span class="mb-item">Vol. 1 · No. 1</span>
   <span class="mb-item mb-title">A CDD.DEV PRODUCTION</span>
-  <span class="mb-item mb-right"><button id="sound-toggle" class="sound-toggle" aria-pressed="false">SOUND: OFF</button><span class="mb-price">10&cent; · still cheaper than re-deriving it</span></span>
+  <span class="mb-item">10&cent; · still cheaper than re-deriving it</span>
 </header>
 
 <!-- ============ FULL-BLEED HERO ============ -->
@@ -342,6 +342,10 @@
     Covers painted by gpt&#8209;image&#8209;1.5. No robots were harmed; several were improved.</p>
 </footer>
 
-<script src="./app.js?v=2" defer></script>
+<button id="mute" class="mute-btn" aria-pressed="false" aria-label="Mute sound effects" title="Sound effects">
+  <svg class="ic-on" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+  <svg class="ic-off" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><line x1="15" y1="9" x2="21" y2="15"/><line x1="21" y1="9" x2="15" y2="15"/></svg>
+</button>
+<script src="./app.js?v=3" defer></script>
 </body>
 </html>

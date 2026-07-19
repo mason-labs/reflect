@@ -1,5 +1,7 @@
 // reflect site — reveals, copy buttons, and retro Web Audio cues.
 // No dependencies, no audio files: every sound is synthesized live.
+// Cues fire only on user gestures (autoplay-safe); the floating mute
+// button silences everything and the choice persists.
 
 // ---------- reveals ----------
 requestAnimationFrame(function () {
@@ -22,8 +24,8 @@ var io = new IntersectionObserver(function (entries) {
 document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
 
 // ---------- audio: synthesized atomic-age cues ----------
-// Off by default; toggled via the SOUND chip; preference persists.
-var soundOn = false;
+var muted = false;
+try { muted = localStorage.getItem("reflect-muted") === "true"; } catch (e) {}
 var ctx = null;
 
 function audio() {
@@ -41,26 +43,22 @@ function envGain(ac, t0, peak, attack, release) {
   return g;
 }
 
-// Theremin bloom — played once when sound is switched on.
-function cueBloom() {
+// Crisp mechanical tick — button presses.
+function cueTick() {
+  if (muted) return;
   var ac = audio(), t = ac.currentTime;
   var o = ac.createOscillator();
-  o.type = "sine";
-  o.frequency.setValueAtTime(220, t);
-  o.frequency.exponentialRampToValueAtTime(440, t + 0.5);
-  o.frequency.exponentialRampToValueAtTime(392, t + 0.9);
-  var v = ac.createOscillator();          // gentle vibrato
-  v.frequency.value = 5.5;
-  var vg = ac.createGain(); vg.gain.value = 6;
-  v.connect(vg); vg.connect(o.frequency);
-  o.connect(envGain(ac, t, 0.05, 0.25, 0.9));
-  o.start(t); v.start(t);
-  o.stop(t + 1.3); v.stop(t + 1.3);
+  o.type = "square";
+  o.frequency.setValueAtTime(1900, t);
+  o.frequency.exponentialRampToValueAtTime(700, t + 0.045);
+  o.connect(envGain(ac, t, 0.045, 0.004, 0.06));
+  o.start(t);
+  o.stop(t + 0.08);
 }
 
-// Two-note confirmation chime — copy actions.
+// Two-note confirmation chime — successful copy.
 function cueChime() {
-  if (!soundOn) return;
+  if (muted) return;
   var ac = audio(), t = ac.currentTime;
   [660, 990].forEach(function (f, i) {
     var o = ac.createOscillator();
@@ -72,9 +70,27 @@ function cueChime() {
   });
 }
 
+// Theremin bloom — played when sound is switched back on.
+function cueBloom() {
+  var ac = audio(), t = ac.currentTime;
+  var o = ac.createOscillator();
+  o.type = "sine";
+  o.frequency.setValueAtTime(220, t);
+  o.frequency.exponentialRampToValueAtTime(440, t + 0.5);
+  o.frequency.exponentialRampToValueAtTime(392, t + 0.9);
+  var v = ac.createOscillator();
+  v.frequency.value = 5.5;
+  var vg = ac.createGain(); vg.gain.value = 6;
+  v.connect(vg); vg.connect(o.frequency);
+  o.connect(envGain(ac, t, 0.05, 0.25, 0.9));
+  o.start(t); v.start(t);
+  o.stop(t + 1.3); v.stop(t + 1.3);
+}
+
 // Filtered-noise rocket whoosh — fleet section, once per visit.
+// Only fires after some gesture has already unlocked audio.
 function cueWhoosh() {
-  if (!soundOn) return;
+  if (muted || !ctx) return;
   var ac = audio(), t = ac.currentTime;
   var len = Math.floor(ac.sampleRate * 0.9);
   var buf = ac.createBuffer(1, len, ac.sampleRate);
@@ -92,22 +108,21 @@ function cueWhoosh() {
   src.start(t);
 }
 
-// Toggle chip
-var toggle = document.getElementById("sound-toggle");
-function renderToggle() {
-  if (toggle) {
-    toggle.textContent = "SOUND: " + (soundOn ? "ON" : "OFF");
-    toggle.setAttribute("aria-pressed", soundOn ? "true" : "false");
+// Floating mute button
+var muteBtn = document.getElementById("mute");
+function renderMute() {
+  if (muteBtn) {
+    muteBtn.setAttribute("aria-pressed", muted ? "true" : "false");
+    muteBtn.setAttribute("aria-label", muted ? "Unmute sound effects" : "Mute sound effects");
   }
 }
-if (toggle) {
-  try { soundOn = localStorage.getItem("reflect-sound") === "on"; } catch (e) {}
-  renderToggle();
-  toggle.addEventListener("click", function () {
-    soundOn = !soundOn;
-    try { localStorage.setItem("reflect-sound", soundOn ? "on" : "off"); } catch (e) {}
-    renderToggle();
-    if (soundOn) cueBloom();
+if (muteBtn) {
+  renderMute();
+  muteBtn.addEventListener("click", function () {
+    muted = !muted;
+    try { localStorage.setItem("reflect-muted", muted ? "true" : "false"); } catch (e) {}
+    renderMute();
+    if (!muted) cueBloom();
   });
 }
 
@@ -129,6 +144,7 @@ if (fleet) {
 // ---------- copy buttons ----------
 document.querySelectorAll(".copy-btn").forEach(function (btn) {
   btn.addEventListener("click", function () {
+    cueTick();
     navigator.clipboard.writeText(btn.dataset.copy).then(function () {
       cueChime();
       var prev = btn.textContent;
