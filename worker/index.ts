@@ -23,11 +23,15 @@ export default {
     }
 
     const response = await env.ASSETS.fetch(request);
+    const out = new Response(response.body, response);
     if (new URL(request.url).pathname.startsWith("/img/")) {
-      const cached = new Response(response.body, response);
-      cached.headers.set("Cache-Control", "public, max-age=604800, immutable");
-      return cached;
+      out.headers.set("Cache-Control", "public, max-age=604800, immutable");
+    } else {
+      // The cdd.dev zone caches aggressively; keep HTML/CSS/JS fresh at the
+      // edge so deploys are visible immediately.
+      out.headers.set("Cache-Control", "no-cache");
+      out.headers.set("CDN-Cache-Control", "no-store");
     }
-    return response;
+    return out;
   },
 };
