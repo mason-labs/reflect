@@ -68,14 +68,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo+Narrow:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./styles.css?v=7c2bd88d">
+<link rel="stylesheet" href="./styles.css?v=07e3b3f3">
 </head>
 <body>
 
 <header class="masthead-bar">
-  <span class="mb-item">Vol. 1 · No. 1</span>
+  <span class="mb-item">Vol. 1 · Issue 01</span>
   <span class="mb-item mb-title">A CDD.DEV PRODUCTION</span>
-  <span class="mb-item">10&cent; · still cheaper than re-deriving it</span>
+  <a class="mb-item mb-series" href="https://cdd.dev/swarm/">Issue 02 · Swarm &rarr;</a>
+  <span class="mb-item mb-price">10&cent; · still cheaper than re-deriving it</span>
 </header>
 
 <!-- ============ FULL-BLEED HERO ============ -->
@@ -333,13 +334,26 @@
 </section>
 
 <footer class="footer">
-  <p class="footer-meta">
-    <a href="https://github.com/ckorhonen/reflect">github.com/ckorhonen/reflect</a>
-    &nbsp;&middot;&nbsp; MIT licensed &nbsp;&middot;&nbsp; works with any harness that reads
-    the open <a href="https://skills.sh">SKILL.md format</a>
-  </p>
-  <p class="footer-colophon">A <a href="https://cdd.dev">cdd.dev</a> production.
-    Covers painted by gpt&#8209;image&#8209;1.5. No robots were harmed; several were improved.</p>
+  <a id="series-banner" class="series-banner series-banner-swarm" href="https://cdd.dev/swarm/" aria-label="Read Swarm, CDD.dev field guide issue 02">
+    <span class="series-banner-art">
+      <img src="./img/fleet-panorama.png" alt="A fleet of retro rockets rises while robots watch from a mesa." loading="lazy">
+    </span>
+    <span class="series-banner-copy">
+      <span class="series-kicker">THE CDD.DEV FIELD GUIDE / ISSUE 02</span>
+      <strong class="series-title">SWARM</strong>
+      <span class="series-tag">Think together. Prove it together.</span>
+      <span class="series-cta">Read issue 02 <span aria-hidden="true">&rarr;</span></span>
+    </span>
+  </a>
+  <div class="footer-details">
+    <p class="footer-meta">
+      <a href="https://github.com/ckorhonen/reflect">github.com/ckorhonen/reflect</a>
+      &nbsp;&middot;&nbsp; MIT licensed &nbsp;&middot;&nbsp; works with any harness that reads
+      the open <a href="https://skills.sh">SKILL.md format</a>
+    </p>
+    <p class="footer-colophon">A <a href="https://cdd.dev">cdd.dev</a> production.
+      Covers painted by gpt&#8209;image&#8209;1.5. No robots were harmed; several were improved.</p>
+  </div>
 </footer>
 
 <div class="sound-cluster">
